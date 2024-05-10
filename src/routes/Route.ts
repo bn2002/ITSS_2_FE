@@ -4,6 +4,7 @@ class RouteConfig {
     static SIGN_UP = '/sign-up';
     static FORGOT_PASSWORD = '/forgot-password';
     static DASHBOARD = '/dashboard';
+    static SUBMITCV = '/submit-cv';
 }
 
 export default RouteConfig;
