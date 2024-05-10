@@ -1,0 +1,89 @@
+@import 'normalize.css';
+
+:root {
+    --primary: #d70018;
+    --rgb-primary: 215, 0, 24;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-weight: 400;
+    // line-height: 1.5;
+    font-family: 'Nunito', sans-serif !important;
+}
+
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+    line-height: normal !important;
+}
+
+*::-webkit-scrollbar {
+    height: 5px;
+    width: 6px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.text-root {
+    color: var(--primary);
+}
+
+a[href] {
+    text-decoration: none;
+}
+
+.fs-12 {
+    font-size: 12px !important;
+}
+
+.hover-underline {
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline !important;
+    }
+}
+
+.hover-primary {
+    &:hover {
+        cursor: pointer;
+        color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+}
+
+.min-height-200 {
+    min-height: 12.5rem !important;
+}
+
+.v-center {
+    display: flex;
+    align-items: center;
+}
+
+.h-center {
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
