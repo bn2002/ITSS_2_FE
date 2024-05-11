@@ -1,0 +1,343 @@
+.detailjob-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 16px 0;
+    gap: 24px;
+
+    .left-column {
+        .job-column-item {
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            padding: 20px 24px;
+            width: 100%;
+        }
+        .job-info {
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: -webkit-fit-content;
+            height: -moz-fit-content;
+            height: fit-content;
+            position: relative;
+
+            .job-title {
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                color: #263a4d;
+                display: -webkit-box;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                letter-spacing: -0.2px;
+                line-height: 28px;
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .list-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .job-deadline {
+                align-items: center;
+                background: #f2f4f5;
+                border-radius: 4px;
+                color: #263a4d;
+                display: flex;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                gap: 6px;
+                letter-spacing: 0.14px;
+                line-height: 22px;
+                padding: 2px 8px 2px 4px;
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+                width: fit-content;
+
+                svg > * {
+                    fill: #7f878f;
+                }
+            }
+
+            .action {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                .btn-apply {
+                    // width: 80%;
+                    flex-grow: 1;
+                    display: flex;
+                    gap: 8px;
+                    justify-content: center;
+                    align-items: center;
+                    &:hover {
+                        .send-icon {
+                            // transform: rotate(-45deg);
+                            transition: all 0.2s ease-in-out;
+                            // margin-bottom: 4px;
+                            transform: translateX(3px);
+                        }
+                    }
+                }
+
+                .save {
+                    align-items: center;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    display: flex;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 600;
+                    gap: 6px;
+                    height: 40px;
+                    justify-content: center;
+                    letter-spacing: 0.175px;
+                    line-height: 22px;
+                    padding: 8px 16px 8px 12px;
+
+                    background: #fff;
+                    border: 1px solid rgba(var(--rgb-primary), 0.4);
+                    color: var(--primary);
+                    width: 130px;
+
+                    &:hover {
+                        border-color: rgba(var(--rgb-primary), 1);
+                    }
+                }
+            }
+        }
+
+        .details-wrapper {
+            gap: 16px;
+            .details-title {
+                border-left: 6px solid var(--primary);
+                color: #212f3f;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                letter-spacing: -0.2px;
+                line-height: 28px;
+                margin: 0;
+                padding-left: 10px;
+            }
+
+            .details-item {
+                .title {
+                    color: #212f3f;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    letter-spacing: -0.16px;
+                    line-height: 24px;
+                    margin: 0;
+                    margin-bottom: 8px;
+                }
+                li,
+                .text {
+                    font-size: 15px;
+                    line-height: 1.42857143;
+                    color: #333;
+                }
+                .action {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-top: 16px;
+                    .btn-apply {
+                        width: 30%;
+                        display: flex;
+                        gap: 8px;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .save {
+                        align-items: center;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        display: flex;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 600;
+                        gap: 6px;
+                        height: 40px;
+                        justify-content: center;
+                        letter-spacing: 0.175px;
+                        line-height: 22px;
+                        padding: 8px 16px 8px 12px;
+
+                        background: #fff;
+                        border: 1px solid rgba(var(--rgb-primary), 0.4);
+                        color: var(--primary);
+                        width: 130px;
+
+                        &:hover {
+                            border-color: rgba(var(--rgb-primary), 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .right-column {
+        .job-column-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+        }
+        .company-info {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+
+            .header {
+                display: flex;
+                align-items: start;
+                gap: 16px;
+
+                .avatar {
+                    aspect-ratio: 1 / 1;
+                    border: 1px solid #e9eaec;
+                    border-radius: 8px;
+                    display: flex;
+                    height: 88px;
+                    width: 88px;
+                    object-fit: contain;
+                    padding: 8px;
+
+                    .img {
+                        border-radius: 5px;
+                        height: 100%;
+                        -o-object-fit: contain;
+                        object-fit: contain;
+                        width: 100%;
+                    }
+                }
+                .company-name {
+                    align-self: stretch;
+                    color: #212f3f;
+                    display: -webkit-box;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    letter-spacing: -0.16px;
+                    line-height: 24px;
+                    max-height: 70px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                }
+            }
+
+            .items {
+                display: flex;
+                gap: 16px;
+
+                .left-item {
+                    align-items: start;
+                    color: #7f878f;
+                    display: flex;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    gap: 8px;
+                    letter-spacing: 0.14px;
+                    line-height: 22px;
+                    width: 88px;
+
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+
+                .detail {
+                    color: #212f3f;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    letter-spacing: 0.14px;
+                    line-height: 22px;
+                    width: calc(100% - 104px);
+                }
+            }
+        }
+
+        .general-info {
+            margin-top: 24px;
+            .header {
+                color: #212f3f;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                letter-spacing: -0.2px;
+                line-height: 28px;
+                margin-bottom: 16px;
+                margin-top: 0;
+            }
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    }
+
+    .item-icon-detail {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        .icon {
+            align-items: center;
+            background: linear-gradient(
+                11deg,
+                rgba(var(--rgb-primary), 0.4),
+                rgba(var(--rgb-primary), 1)
+            );
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 40px;
+            justify-content: center;
+            padding: 10px;
+            width: 40px;
+
+            svg > * {
+                fill: #fff;
+            }
+        }
+
+        .item-title {
+            color: #263a4d;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            letter-spacing: 0.14px;
+            line-height: 22px;
+        }
+
+        .item-detail {
+            color: #212f3f;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.175px;
+            line-height: 22px;
+        }
+    }
+}

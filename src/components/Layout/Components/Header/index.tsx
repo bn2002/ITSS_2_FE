@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import ButtonAuth from 'components/ButtonAuth/buttonAuth';
-import MenuUser from 'components/MenuUser';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { RootState } from 'redux/store';
-import RouteConfig from 'routes/Route';
-import Config from 'utils/Config';
-import './styles.scss';
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "redux/store";
+import RouteConfig from "routes/Route";
+import Config from "utils/Config";
+import "./styles.scss";
 
 function Header() {
     const userInfo = useSelector((state: RootState) => state.userInfoState);
@@ -15,9 +13,9 @@ function Header() {
         <div className="header-wrapper">
             <nav
                 className="navbar navbar-expand"
-                style={{ backgroundColor: 'var(--primary)', padding: 8, height: 64 }}
+                style={{ backgroundColor: "var(--primary)", padding: 8, height: 64 }}
             >
-                <div className={'center justify-content-between w-100 flex-nowrap'}>
+                <div className={"center justify-content-between w-100 flex-nowrap"}>
                     <div className="d-flex text-light gap-2">
                         <Link
                             className="navbar-brand text-light"
@@ -27,15 +25,19 @@ function Header() {
                                     : RouteConfig.HOME
                             }
                         >
-                            Quang Đạt
+                            <img
+                                src="/logo_desktop.png"
+                                style={{ height: 64, objectFit: "cover" }}
+                                alt="logo"
+                            />
                         </Link>
                     </div>
 
-                    <div className="" id="">
+                    {/* <div className="" id="">
                         <ul className="navbar-nav ms-auto align-items-center">
                             <li>{userInfo?.email ? <MenuUser /> : <ButtonAuth />}</li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </nav>
         </div>
