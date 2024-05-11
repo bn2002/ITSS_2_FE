@@ -185,7 +185,7 @@ function DetailJob() {
                     </div>
                     <div className="items">
                         <div className="left-item">
-                            <PeopleAltIcon /> Địa điểm:
+                            <LocationOnIcon /> Địa điểm:
                         </div>
                         <div className="detail">{job.company?.place}</div>
                     </div>
