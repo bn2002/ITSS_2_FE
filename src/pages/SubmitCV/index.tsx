@@ -1,31 +1,22 @@
-import { Button, Col, Row, Spinner, Modal, Form } from 'react-bootstrap';
-import { useState } from 'react';
-import FolderSharedIcon from '@mui/icons-material/FolderShared';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FolderSharedIcon from "@mui/icons-material/FolderShared";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
-function SubmitCV() {
-    const [show, setShow] = useState(false);
-
+function SubmitCV({ show, setShow, title }: { show: boolean; setShow: Function; title: string }) {
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Ứng tuyển
-            </Button>
-
-            <Modal show={show} onHide={handleClose} animation={false} size="lg">
+            <Modal show={show} onHide={handleClose} animation={true} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Ứng tuyển{' '}
-                        <span className="text-danger">Lập Trình Viên (.NET) Đi Làm Ngay</span>
+                        Ứng tuyển <span className="text-danger">{title}</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>
                         <div>
-                            <p style={{ fontSize: '20px' }} className="d-flex align-items-center">
+                            <p style={{ fontSize: "20px" }} className="d-flex align-items-center">
                                 <FolderSharedIcon htmlColor="red" className="me-2" />
                                 Nhập thông tin để ứng tuyển
                             </p>
@@ -34,7 +25,7 @@ function SubmitCV() {
                                     <CloudUploadIcon className="me-2" fontSize="large" />
                                     <span>Tải lên CV từ máy tính, chọn hoặc kéo thả</span>
                                 </div>
-                                <span className="text-secondary" style={{ fontSize: '14px' }}>
+                                <span className="text-secondary" style={{ fontSize: "14px" }}>
                                     Hỗ trợ định dạng .doc, .docx, pdf có kích thước dưới 5MB
                                 </span>
                                 <Button variant="success" className="mt-2" size="sm">
@@ -86,14 +77,14 @@ function SubmitCV() {
 
                     <div className="mt-4">
                         <div>
-                            <p style={{ fontSize: '20px' }} className="d-flex align-items-center">
+                            <p style={{ fontSize: "20px" }} className="d-flex align-items-center">
                                 <FolderSharedIcon htmlColor="red" className="me-2" />
                                 Thư giới thiệu
                             </p>
                         </div>
                         <div>
                             <div className="d-flex justify-content-between">
-                                <p className="text-secondary" style={{ fontSize: '14px' }}>
+                                <p className="text-secondary" style={{ fontSize: "14px" }}>
                                     Một thư giới thiệu ngắn gọn, chỉn chu sẽ giúp bạn trở nên chuyên
                                     nghiệp và gây ấn tượng hơn với nhà tuyển dụng.
                                 </p>
@@ -105,7 +96,7 @@ function SubmitCV() {
                                         <Form.Control
                                             as="textarea"
                                             placeholder="Viết giới thiệu ngắn gọn về bản thân (điểm mạnh, điểm yếu) và nêu rõ mong muốn, lý do bạn muốn ứng tuyển cho vị trí này."
-                                            style={{ height: '100px' }}
+                                            style={{ height: "100px" }}
                                         />
                                     </Col>
                                 </Row>
@@ -114,10 +105,10 @@ function SubmitCV() {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" style={{ flex: '1' }} onClick={handleClose}>
+                    <Button variant="secondary" style={{ flex: "1" }} onClick={handleClose}>
                         Hủy
                     </Button>
-                    <Button variant="danger" style={{ flex: '1' }} onClick={handleClose}>
+                    <Button variant="danger" style={{ flex: "1" }} onClick={handleClose}>
                         Nộp hồ sơ
                     </Button>
                 </Modal.Footer>
