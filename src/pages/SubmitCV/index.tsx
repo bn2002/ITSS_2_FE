@@ -1,7 +1,8 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import FolderSharedIcon from "@mui/icons-material/FolderShared";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
+import RouteConfig from "routes/Route";
 function SubmitCV({ show, setShow, title }: { show: boolean; setShow: Function; title: string }) {
     const handleClose = () => setShow(false);
 
@@ -28,9 +29,6 @@ function SubmitCV({ show, setShow, title }: { show: boolean; setShow: Function; 
                                 <span className="text-secondary" style={{ fontSize: "14px" }}>
                                     Hỗ trợ định dạng .doc, .docx, pdf có kích thước dưới 5MB
                                 </span>
-                                <Button variant="success" className="mt-2" size="sm">
-                                    Chọn CV
-                                </Button>
                             </div>
                         </div>
                         <hr />
@@ -108,9 +106,16 @@ function SubmitCV({ show, setShow, title }: { show: boolean; setShow: Function; 
                     <Button variant="secondary" style={{ flex: "1" }} onClick={handleClose}>
                         Hủy
                     </Button>
-                    <Button variant="danger" style={{ flex: "1" }} onClick={handleClose}>
-                        Nộp hồ sơ
-                    </Button>
+                    <Link to={`${RouteConfig.APPLIED_JOBS}`} style={{ flex: "1" }}>
+                        <Button
+                            variant="danger"
+                            onClick={handleClose}
+                            style={{ width: "100%" }}
+                            className="d-block"
+                        >
+                            Nộp hồ sơ
+                        </Button>
+                    </Link>
                 </Modal.Footer>
             </Modal>
         </>

@@ -6,6 +6,7 @@ class RouteConfig {
     static DASHBOARD = "/dashboard";
     static CALLVIDEO = "/call-video";
     static DETAIL_JOBS = "chi-tiet-viec-lam/:slug/";
+    static APPLIED_JOBS = "/da-ung-tuyen";
 }
 
 export default RouteConfig;
