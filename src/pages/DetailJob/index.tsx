@@ -167,8 +167,13 @@ function DetailJob() {
                             </div>
                         </div>
                     </div>
+                    <div className="details-item">
+                        <div className="title mt-3">Đánh giá công việc</div>
+                        <img src="/rating.png" alt="rating" style={{ width: "100%" }} />
+                    </div>
                 </div>
             </div>
+
             <div className="right-column">
                 <div className="company-info job-column-item">
                     <div className="header">
