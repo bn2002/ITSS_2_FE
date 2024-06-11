@@ -18,3 +18,12 @@ export const getJobInfo = (params: { slug: string }) => {
         return data;
     });
 };
+
+export const changeJobInfoApi = (params: { _id: string; newDetail: any }) => {
+    return POST({
+        url: APIConfig.CHANGE_JOB_INFO,
+        params: params,
+    }).then((data: any) => {
+        return data;
+    });
+};

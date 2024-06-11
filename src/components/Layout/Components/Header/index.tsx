@@ -6,6 +6,7 @@ import { RootState } from "redux/store";
 import RouteConfig from "routes/Route";
 import Config from "utils/Config";
 import "./styles.scss";
+import { Button } from "react-bootstrap";
 
 function Header() {
     const userInfo = useSelector((state: RootState) => state.userInfoState);
@@ -33,11 +34,7 @@ function Header() {
                         </Link>
                     </div>
 
-                    {/* <div className="" id="">
-                        <ul className="navbar-nav ms-auto align-items-center">
-                            <li>{userInfo?.email ? <MenuUser /> : <ButtonAuth />}</li>
-                        </ul>
-                    </div> */}
+                    <Button variant="warning">Công việc yêu thích</Button>
                 </div>
             </nav>
         </div>

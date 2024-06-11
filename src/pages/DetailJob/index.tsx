@@ -12,14 +12,20 @@ import SubmitCV from "pages/SubmitCV";
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getJobInfo } from "service/job.service";
+import { changeJobInfoApi, getJobInfo } from "service/job.service";
 import { IJob } from "utils/interface";
 import "./style.scss";
+import Rating from "@mui/material/Rating";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 function DetailJob() {
     const { slug } = useParams();
 
     const [job, setJob] = useState({} as IJob);
     const [showSubmitCV, setShowSubmitCV] = useState(false);
+    const [totalRate, setTotalRate] = useState(0);
+    const [myRate, setMyRate] = useState(job.my_rate || 0);
     useEffect(() => {
         const fetchJob = async () => {
             if (slug) {
@@ -30,7 +36,34 @@ function DetailJob() {
             }
         };
         slug && fetchJob();
-    }, []);
+    }, [myRate]);
+    const averageRate = (ratings: number[], totalRates: number) => {
+        let score = 0;
+        ratings?.forEach((rate, index) => {
+            score += rate * (index + 1);
+        });
+        return (score / totalRates).toFixed(1);
+    };
+
+    useEffect(() => {
+        if (job._id) {
+            const totalRates = job.ratings.reduce((total, rate) => total + rate, 0);
+            setTotalRate(totalRates);
+            setMyRate(job.my_rate);
+        }
+    }, [job]);
+
+    const handleChangeMyRate = (e: any) => {
+        setMyRate(e.target.value);
+        console.log(typeof e.target.value);
+        const newRating = [...job.ratings];
+        newRating[e.target.value - 1] += 1;
+        changeJobInfoApi({
+            _id: job._id,
+            newDetail: { my_rate: parseInt(e.target.value, 10), ratings: newRating },
+        });
+    };
+
     return (
         <Container className=" detailjob-wrapper">
             <div className="left-column">
@@ -167,9 +200,113 @@ function DetailJob() {
                             </div>
                         </div>
                     </div>
-                    <div className="details-item">
+                    <div className="details-item ratings">
                         <div className="title mt-3">Đánh giá công việc</div>
-                        <img src="/rating.png" alt="rating" style={{ width: "100%" }} />
+                        {/* <img src="/rating.png" alt="rating" style={{ width: "100%" }} /> */}
+                        <div className="ratings-wrapper">
+                            <div className="left">
+                                <div className="average">
+                                    {averageRate(job.ratings, totalRate)}/5
+                                </div>
+                                <div></div>
+                                <Rating name="read-only" value={5} readOnly />
+                                <div className="total-rates">{totalRate} đánh giá</div>
+                            </div>
+                            {job.ratings?.length && (
+                                <div className="right">
+                                    <div className="items-rating">
+                                        <div className="star">
+                                            5
+                                            <StarRateIcon
+                                                className="icon"
+                                                sx={{ backgroundColor: "#faaf0" }}
+                                                fontSize="small"
+                                            />
+                                        </div>
+                                        <progress
+                                            max={100}
+                                            value={(job.ratings[4] / totalRate) * 100}
+                                            className="progress"
+                                        />
+                                        <div className="total">{job.ratings[4]} đánh giá</div>
+                                    </div>
+                                    <div className="items-rating">
+                                        <div className="star">
+                                            4
+                                            <StarRateIcon
+                                                className="icon"
+                                                sx={{ backgroundColor: "#faaf0" }}
+                                                fontSize="small"
+                                            />
+                                        </div>
+                                        <progress
+                                            max={100}
+                                            value={(job.ratings[3] / totalRate) * 100}
+                                            className="progress"
+                                        />
+
+                                        <div className="total">{job.ratings[3]} đánh giá</div>
+                                    </div>
+                                    <div className="items-rating">
+                                        <div className="star">
+                                            3
+                                            <StarRateIcon
+                                                className="icon"
+                                                sx={{ backgroundColor: "#faaf0" }}
+                                                fontSize="small"
+                                            />
+                                        </div>
+                                        <progress
+                                            max={100}
+                                            value={(job.ratings[2] / totalRate) * 100}
+                                            className="progress"
+                                        />
+                                        <div className="total">{job.ratings[2]} đánh giá</div>
+                                    </div>
+                                    <div className="items-rating">
+                                        <div className="star">
+                                            2
+                                            <StarRateIcon
+                                                className="icon"
+                                                sx={{ backgroundColor: "#faaf0" }}
+                                                fontSize="small"
+                                            />
+                                        </div>
+                                        <progress
+                                            max={100}
+                                            value={(job.ratings[1] / totalRate) * 100}
+                                            className="progress"
+                                        />
+                                        <div className="total">{job.ratings[1]} đánh giá</div>
+                                    </div>
+                                    <div className="items-rating">
+                                        <div className="star">
+                                            1
+                                            <StarRateIcon
+                                                className="icon"
+                                                sx={{ backgroundColor: "#faaf0" }}
+                                                fontSize="small"
+                                            />
+                                        </div>
+                                        <progress
+                                            max={100}
+                                            value={(job.ratings[0] / totalRate) * 100}
+                                            className="progress"
+                                        />
+                                        <div className="total">{job.ratings[0]} đánh giá</div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="my-rate">
+                            <div className="m-0 title">Đánh giá của bạn</div>
+                            <Rating
+                                name="read-only"
+                                value={myRate}
+                                onChange={handleChangeMyRate}
+                                readOnly={!!myRate}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

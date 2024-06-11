@@ -14,6 +14,8 @@ export interface IJob {
     benefits: string[];
     time: string;
     general_info: string[];
+    ratings: number[];
+    my_rate: number;
 }
 
 export interface ICompany {
