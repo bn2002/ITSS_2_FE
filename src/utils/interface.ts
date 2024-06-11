@@ -23,3 +23,15 @@ export interface ICompany {
     staffs: string;
     place: string;
 }
+
+export interface IJobFilter {
+    keyword: string;
+    location: string;
+    experience: string;
+    salary: string;
+}
+
+export interface IFilterOption {
+    key: string;
+    value: string;
+}

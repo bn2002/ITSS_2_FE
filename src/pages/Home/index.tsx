@@ -4,22 +4,90 @@ import SearchJob from "components/search-job";
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { getAllJob } from "service/job.service";
-import { IJob } from "utils/interface";
+import { IJob, IJobFilter } from "utils/interface";
 import "./style.scss";
 function Home() {
+    const [initJob, setInitJob] = useState([] as IJob[]);
     const [jobs, setJobs] = useState([] as IJob[]);
     useEffect(() => {
         const fetchJob = async () => {
             const res = await getAllJob({});
             const data = await res;
-
+            setInitJob(data);
             setJobs(data);
         };
         fetchJob();
     }, []);
+
+    const handlerFilter = (filters: IJobFilter) => {
+        console.log(filters);
+        let jobs = initJob;
+        if (filters.keyword !== "") {
+            jobs = jobs.filter((job) => {
+                return job.title.toLocaleLowerCase().includes(filters.keyword.toLocaleLowerCase());
+            });
+        }
+
+        if (filters.experience !== "all") {
+            if (filters.experience === ">5") {
+                jobs = jobs.filter((job) => {
+                    let jobExperience = 0;
+                    try {
+                        jobExperience = parseInt(job.experience);
+                    } catch (error) {}
+
+                    return jobExperience > 5;
+                });
+            } else {
+                jobs = jobs.filter((job) => {
+                    let jobExperience = 0;
+                    let experience = 0;
+                    try {
+                        jobExperience = parseInt(job.experience);
+                        experience = parseInt(filters.experience);
+                    } catch (error) {}
+
+                    return jobExperience === experience;
+                });
+            }
+        }
+
+        if (filters.location !== "all") {
+            jobs = jobs.filter((job) => {
+                let locations = job.places.map((place) => place.toLocaleLowerCase());
+                return locations.includes(filters.location.toLocaleLowerCase());
+            });
+        }
+
+        if (filters.salary !== "all") {
+            if (filters.salary === "thoa_thuan") {
+                jobs = jobs.filter((job) => {
+                    return job.salary.toLocaleLowerCase().includes("thoả thuận");
+                });
+            } else {
+                let max = 0;
+                let min = 0;
+                try {
+                    let filterSalary = filters.salary.split("-");
+                    min = parseFloat(filterSalary[0]);
+                    max = parseFloat(filterSalary[1]);
+                } catch (error) {}
+                jobs = jobs.filter((job) => {
+                    try {
+                        let jobSalary = parseFloat(job.salary);
+                        return jobSalary >= min && jobSalary <= max;
+                    } catch (error) {
+                        return false;
+                    }
+                });
+            }
+        }
+
+        setJobs(jobs);
+    };
     return (
         <Container className=" homepage-wrapper">
-            <SearchJob />
+            <SearchJob onSubmit={handlerFilter} />
             {jobs.map((job, index) => {
                 return (
                     <div
@@ -49,13 +117,14 @@ function Home() {
                             </div>
                         </div>
                         <div className="button-action">
-                            <Button variant="danger">Ứng tuyển</Button>
+                            <Button variant="danger">Chi tiết</Button>
                             <div className="save">
                                 <FavoriteBorderIcon color="error" />
                             </div>
                         </div>
                         <div className="salary">
-                            <PaidIcon color="error" /> {job.salary}
+                            <PaidIcon color="error" />{" "}
+                            {job.salary.includes("Thoả thuận") ? job.salary : `${job.salary} triệu`}
                         </div>
                     </div>
                 );
