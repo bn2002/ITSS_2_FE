@@ -16,6 +16,7 @@ export interface IJob {
     general_info: string[];
     ratings: number[];
     my_rate: number;
+    favorite: boolean;
 }
 
 export interface ICompany {

@@ -2,6 +2,7 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import HourglassFullIcon from "@mui/icons-material/HourglassFull";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -26,6 +27,7 @@ function DetailJob() {
     const [showSubmitCV, setShowSubmitCV] = useState(false);
     const [totalRate, setTotalRate] = useState(0);
     const [myRate, setMyRate] = useState(job.my_rate || 0);
+    const [favorite, setFavorite] = useState(job.favorite || false);
     useEffect(() => {
         const fetchJob = async () => {
             if (slug) {
@@ -36,7 +38,7 @@ function DetailJob() {
             }
         };
         slug && fetchJob();
-    }, [myRate]);
+    }, [myRate, favorite]);
     const averageRate = (ratings: number[], totalRates: number) => {
         let score = 0;
         ratings?.forEach((rate, index) => {
@@ -50,6 +52,7 @@ function DetailJob() {
             const totalRates = job.ratings.reduce((total, rate) => total + rate, 0);
             setTotalRate(totalRates);
             setMyRate(job.my_rate);
+            setFavorite(job.favorite);
         }
     }, [job]);
 
@@ -62,6 +65,16 @@ function DetailJob() {
             _id: job._id,
             newDetail: { my_rate: parseInt(e.target.value, 10), ratings: newRating },
         });
+    };
+
+    const handleFavorite = (e: any) => {
+        let current = favorite ?? false;
+        setFavorite(!current);
+        changeJobInfoApi({
+            _id: job._id,
+            newDetail: { favorite: !current },
+        });
+        console.log(job);
     };
 
     return (
@@ -100,7 +113,7 @@ function DetailJob() {
                             </div>
                             <div>
                                 <div className="item-title">Kinh nghiệm</div>
-                                <div className="item-detail">{job.experience}</div>
+                                <div className="item-detail">{job.experience} năm</div>
                             </div>
                         </div>
                     </div>
@@ -111,7 +124,7 @@ function DetailJob() {
                     </div>
 
                     <div className="action">
-                        <Button
+                        {/* <Button
                             variant="danger"
                             className="btn-apply"
                             onClick={() => {
@@ -119,9 +132,14 @@ function DetailJob() {
                             }}
                         >
                             Ứng tuyển ngay <SendIcon fontSize="small" className="send-icon" />
-                        </Button>
-                        <div className="save">
-                            <FavoriteBorderIcon color="error" /> Lưu tin
+                        </Button> */}
+                        <div className="save" onClick={handleFavorite}>
+                            {favorite === true ? (
+                                <FavoriteIcon color="error" />
+                            ) : (
+                                <FavoriteBorderIcon color="error" />
+                            )}
+                            Lưu tin
                         </div>
                     </div>
                 </div>
@@ -186,7 +204,7 @@ function DetailJob() {
                             đây.
                         </div>
                         <div className="action">
-                            <Button
+                            {/* <Button
                                 variant="danger"
                                 className="btn-apply"
                                 onClick={() => {
@@ -194,7 +212,7 @@ function DetailJob() {
                                 }}
                             >
                                 Ứng tuyển ngay
-                            </Button>
+                            </Button> */}
                             <div className="save">
                                 <FavoriteBorderIcon color="error" /> Lưu tin
                             </div>

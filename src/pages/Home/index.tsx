@@ -2,9 +2,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PaidIcon from "@mui/icons-material/Paid";
 import SearchJob from "components/search-job";
 import { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { getAllJob } from "service/job.service";
 import { IJob, IJobFilter } from "utils/interface";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./style.scss";
 function Home() {
     const [initJob, setInitJob] = useState([] as IJob[]);
@@ -86,49 +87,59 @@ function Home() {
         setJobs(jobs);
     };
     return (
-        <Container className=" homepage-wrapper">
+        <Container className="homepage-wrapper ">
             <SearchJob onSubmit={handlerFilter} />
-            {jobs.map((job, index) => {
-                return (
-                    <div
-                        className="card-wrapper"
-                        key={index}
-                        onClick={() => {
-                            window.open("chi-tiet-viec-lam/" + job.slug, "_blank");
-                        }}
-                    >
-                        <div className="avatar">
-                            <img src={job.image} alt={job.title} className="img" />
-                        </div>
-                        <div className="info-wrapper">
-                            <div>
-                                <div className="title">{job.title}</div>
-                                <div className="company">{job.company.name}</div>
-                            </div>
-                            <div className="badge">
-                                <div className="place">
-                                    {job.places.map((place, index) => {
-                                        if (index > 0) return `, ${place}`;
-                                        return place;
-                                    })}
+            <Row xs={2}>
+                {jobs.map((job, index) => {
+                    return (
+                        <Col className=" d-flex justify-content-center">
+                            <div
+                                className="card-wrapper"
+                                key={index}
+                                onClick={() => {
+                                    window.open("chi-tiet-viec-lam/" + job.slug, "_blank");
+                                }}
+                            >
+                                <div className="avatar">
+                                    <img src={job.image} alt={job.title} className="img" />
                                 </div>
+                                <div className="info-wrapper">
+                                    <div>
+                                        <div className="title">{job.title}</div>
+                                        <div className="company">{job.company.name}</div>
+                                    </div>
+                                    <div className="badge">
+                                        <div className="place">
+                                            {job.places.map((place, index) => {
+                                                if (index > 0) return `, ${place}`;
+                                                return place;
+                                            })}
+                                        </div>
 
-                                {job.time && <div className="time">{job.time}</div>}
+                                        {job.time && <div className="time">{job.time}</div>}
+                                    </div>
+                                </div>
+                                <div className="button-action">
+                                    <Button variant="danger">Chi tiết</Button>
+                                    <div className="save">
+                                        {job.favorite === true ? (
+                                            <FavoriteIcon color="error" />
+                                        ) : (
+                                            <FavoriteBorderIcon color="error" />
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="salary">
+                                    <PaidIcon color="error" />{" "}
+                                    {job.salary.includes("Thoả thuận")
+                                        ? job.salary
+                                        : `${job.salary} triệu`}
+                                </div>
                             </div>
-                        </div>
-                        <div className="button-action">
-                            <Button variant="danger">Chi tiết</Button>
-                            <div className="save">
-                                <FavoriteBorderIcon color="error" />
-                            </div>
-                        </div>
-                        <div className="salary">
-                            <PaidIcon color="error" />{" "}
-                            {job.salary.includes("Thoả thuận") ? job.salary : `${job.salary} triệu`}
-                        </div>
-                    </div>
-                );
-            })}
+                        </Col>
+                    );
+                })}
+            </Row>
         </Container>
     );
 }

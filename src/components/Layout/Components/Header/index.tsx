@@ -34,7 +34,9 @@ function Header() {
                         </Link>
                     </div>
 
-                    <Button variant="warning">Công việc yêu thích</Button>
+                    <Link className="navbar-brand text-light" to={RouteConfig.APPLIED_JOBS}>
+                        <Button variant="warning">Công việc yêu thích</Button>
+                    </Link>
                 </div>
             </nav>
         </div>

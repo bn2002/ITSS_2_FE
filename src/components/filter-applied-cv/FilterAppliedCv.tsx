@@ -8,7 +8,17 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
 import { Button } from "react-bootstrap";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-const FilterAppliedCV = () => {
+import { useState } from "react";
+import { IJobFilter } from "utils/interface";
+const FilterAppliedCV = ({ onSubmit }: { onSubmit: any }) => {
+    const [keyword, setKeyword] = useState("");
+
+    let filters: IJobFilter = {
+        keyword: keyword,
+        location: "",
+        experience: "",
+        salary: "",
+    };
     return (
         <div className="search-job-wrapper center gap-2 mb-3">
             <FormControl
@@ -27,12 +37,13 @@ const FilterAppliedCV = () => {
                     inputProps={{
                         "aria-label": "weight",
                     }}
+                    onChange={(e) => setKeyword(e.target.value)}
                     //     className="p-0"
                     placeholder="Tên công việc"
                 />
                 {/* <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText> */}
             </FormControl>
-            <TextField
+            {/* <TextField
                 color="error"
                 id="outlined-select-place"
                 placeholder="Trạng thái"
@@ -54,8 +65,14 @@ const FilterAppliedCV = () => {
                         </MenuItem>
                     ),
                 )}
-            </TextField>
-            <Button variant="danger" style={{ height: 56, width: 140 }}>
+            </TextField> */}
+            <Button
+                variant="danger"
+                style={{ height: 56, width: 140 }}
+                onClick={() => {
+                    onSubmit(filters);
+                }}
+            >
                 Tìm kiếm
             </Button>
         </div>
