@@ -198,11 +198,11 @@ function DetailJob() {
                     </div>
 
                     <div className="details-item">
-                        <div className="title">Cách thức ứng tuyển</div>
+                        {/* <div className="title">Cách thức ứng tuyển</div>
                         <div>
                             Ứng viên nộp hồ sơ trực tuyến bằng cách bấm <b>Ứng tuyển</b> ngay dưới
                             đây.
-                        </div>
+                        </div> */}
                         <div className="action">
                             {/* <Button
                                 variant="danger"
@@ -213,8 +213,14 @@ function DetailJob() {
                             >
                                 Ứng tuyển ngay
                             </Button> */}
-                            <div className="save">
-                                <FavoriteBorderIcon color="error" /> Lưu tin
+
+                            <div className="save" onClick={handleFavorite}>
+                                {favorite === true ? (
+                                    <FavoriteIcon color="error" />
+                                ) : (
+                                    <FavoriteBorderIcon color="error" />
+                                )}
+                                Lưu tin
                             </div>
                         </div>
                     </div>
