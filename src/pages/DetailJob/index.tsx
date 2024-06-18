@@ -4,6 +4,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HourglassFullIcon from "@mui/icons-material/HourglassFull";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
@@ -33,7 +34,10 @@ function DetailJob() {
             if (slug) {
                 const res = await getJobInfo({ slug });
                 const data = await res;
-
+                if (!data?.salary?.includes("thuận") ?? false) {
+                    data.salary = `${data.salary} triệu`;
+                }
+                // data.salary = salary;
                 setJob(data);
             }
         };
@@ -354,6 +358,13 @@ function DetailJob() {
                             <LocationOnIcon /> Địa điểm:
                         </div>
                         <div className="detail">{job.company?.place}</div>
+                    </div>
+
+                    <div className="items">
+                        <div className="left-item">
+                            <LocalPhoneIcon /> Liên hệ:
+                        </div>
+                        <div className="detail">03969455217</div>
                     </div>
                 </div>
 
